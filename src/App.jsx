@@ -1,14 +1,14 @@
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import Quote from "./components/fetch/Quote";
+import Quote from "./components/swr/Quote";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <div className="App">
-      <Quote />
+      <Suspense fallback={<h1>Loading data...</h1>}>
+        <Quote />
+      </Suspense>
     </div>
   );
 }
