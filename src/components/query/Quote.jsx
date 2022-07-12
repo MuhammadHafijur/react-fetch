@@ -1,21 +1,13 @@
-import { useState, useEffect } from "react";
+import { useQuery } from "react-query";
+import getQuote from "./getQuoteApi";
 
-export default function Quote() {
-  const [quote, setQuote] = useState(null);
+export default function Quote({ quote }) {
+  const { data } = useQuery("quote", () => getQuote());
 
-  useEffect(() => {
-    const fetchQuote = async () => {
-      const res = await fetch("https://api.quotable.io/random");
-      const data = await res.json();
-      setQuote(data);
-    };
-
-    fetchQuote();
-  }, []);
   return (
     <div>
       <h1>Get quotes using fetch API</h1>
-      <div>{quote?.content}</div>
+      <div>{data?.content}</div>
     </div>
   );
 }
